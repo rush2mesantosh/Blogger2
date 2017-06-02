@@ -5,6 +5,8 @@ class ArticlesController < ApplicationController
   end
   def show
     @article = Article.find(params[:id])
+    @comment = Comment.new
+    @comment.article_id = @article.id
   end
   def new
     @article = Article.new
@@ -18,7 +20,7 @@ class ArticlesController < ApplicationController
   def destroy
     @article = Article.destroy(params[:id])
     flash.notice = "Article '#{@article.title}' Deleted!"
-    index
+    return index
   end
   def edit
     @article = Article.find(params[:id])
